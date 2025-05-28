@@ -1,0 +1,76 @@
+---
+title: "Quiz 22"
+subtitle: "STAT 201"
+author: "Owen Yan"
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+
+execute:
+  message: false
+  warning: false
+---
+```{r}
+#1. Matrix
+
+capitals <- read.csv("capital_cities.csv",
+                     stringsAsFactors = FALSE,
+                     check.names = TRUE)
+
+country_names <- capitals$Country.Name
+coordinates_capital_cities <- as.matrix(
+  capitals[, c("Capital.Latitude", "Capital.Longitude")]
+)
+
+idx_dc   <- which(country_names == "United States")
+dc_coords <- coordinates_capital_cities[idx_dc, ]  
+
+dc_mat   <- matrix(dc_coords,
+                   nrow = nrow(coordinates_capital_cities),
+                   ncol = 2,
+                   byrow = TRUE)
+
+diff_mat  <- coordinates_capital_cities - dc_mat
+distances <- apply(diff_mat, 1, function(z) sqrt(sum(z^2)))
+
+valid      <- distances > 0
+ord        <- order(distances[valid])
+top10_idx  <- which(valid)[ ord[1:10] ]
+
+print(country_names[top10_idx])
+
+print(coordinates_capital_cities[top10_idx, ])
+
+
+```
+```{r}
+#2. Data Frame
+
+cap2 <- read.csv("capital_cities.csv",
+                 stringsAsFactors = FALSE,
+                 check.names = TRUE)
+
+df <- data.frame(
+  country = cap2$Country.Name,
+  lat     = cap2$Capital.Latitude,
+  lon     = cap2$Capital.Longitude,
+  stringsAsFactors = FALSE
+)
+
+dc_lat <- df$lat[df$country == "United States"]
+dc_lon <- df$lon[df$country == "United States"]
+
+df$dist <- sqrt((df$lat - dc_lat)^2 + (df$lon - dc_lon)^2)
+
+df2   <- df[df$dist > 0, ]
+df2   <- df2[order(df2$dist), ]
+top10 <- head(df2, 10)
+
+print(top10$country)
+
+print(as.matrix(top10[, c("lat", "lon")]))
+
+```
+

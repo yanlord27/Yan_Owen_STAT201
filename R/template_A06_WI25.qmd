@@ -1,0 +1,236 @@
+---
+title: "Assignment 6"
+subtitle: "STAT 201"
+author: "YOUR NAME"
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+
+execute:
+  message: false
+  warning: false
+---
+
+## Instructions {-}
+
+1. **Write your name** on the assignment
+
+2. Write your code in the *Code* cells of the **template provided** to write solutions for the assignment. **Do not open a new qmd**, and work from scratch. Ensure that the solution is written neatly enough to understand and grade.
+
+3. You may talk to a friend, discuss the questions and potential directions for solving them. However, you need to write your own solutions and code separately, and not as a group activity. Do not use AI to solve the problems.
+
+4. There are point deductions if your code is not clean and organized.
+
+5. Only print what is asked for. Highly inefficient code will be deducted for because it demonstrates lack of understanding.
+
+6. Render as an HTML and **submit BOTH the .qmd and HTML file**.
+
+The grader cannot grade what they cannot see! Failure to render your document after completing all questions will lead to deductions.
+
+
+## Question 1 (3 points)
+
+### Part a
+
+Create a vector called `bears` which contains the values `20, 17, 10, 28, 13, 30, 13, 17, 16, 26, 12, 28, 17, 27`.
+
+Create a vector called `opponent` which contains the values `27, 41, 31, 20, 19, 12, 30, 24, 13, 31, 10, 13, 20, 16`.
+
+Note: each element represents the amount of points scored in a particular football game.
+
+No need to print any output here.
+
+```{r}
+
+```
+
+
+### Part b
+
+Insert the value `40` as the 5th element in `bears`.
+
+Insert the value `38` as the 1st element in `opponent`.
+
+Print both vectors to prove you were successful.
+
+```{r}
+
+```
+
+
+### Part c
+
+Determine the largest win spread for the Bears (ie: spread is the difference between bear's score and opponent's score) and print the following statement:
+
+"The largest win spread is {}, when the Bears scored {} points and the Opponent scored {} points."
+
+Note: this needs to still run correctly even if the elements changed or were re-ordered.
+
+```{r}
+
+```
+
+
+## Question 2 (7 points)
+
+### Part a
+
+Create a matrix `game_score` by utilizing the vectors `bears` and `opponent` from Question 1 where the first column represents `bears` and the second column represents `opponent`. 
+
+Name the columns `bears` and `opponent` respectively.
+
+Print `game_score` to prove this was successful.
+
+```{r}
+
+```
+
+
+### Part b
+
+The `game_score` is missing some games. Add on a matrix that contains bears scores of `37, 9` and opponent scores of `17, 17`, respectively. Print the new `game_score` matrix.
+
+```{r}
+
+```
+
+
+### Part c
+
+Iterate through `game_score` and print "Win" if the bears won and "Loss" if the bears lost.
+
+```{r}
+
+```
+
+
+### Part d
+
+Use `game_score` and an **inequality** to check if the bears won each game. Store this as a vector called `win` and print the vector `win`.
+
+ie: Since 20 is less than 38 the first element of `win` should be FALSE.
+
+```{r}
+
+```
+
+
+### Part e
+
+Add the vector `win` as a third column to `game_score`. Print `game_score`.
+
+```{r}
+
+```
+
+
+### Part f
+
+How many games did the Bears lose before their first win (games are in order)? Many ways to accomplish this BUT you must utilize `game_score` to do so. 
+
+Clarification: do not directly reference any of the individual vectors from previous question parts, this must use the matrix `game_score`. 
+
+The code must be capable of running correctly even if the values changed.
+
+```{r}
+
+```
+
+
+## Question 3 (2 points)
+
+Write a function called `number_of_factors` that takes an integer and returns how many factors the number has. Run your function with `8` to check if it works.
+
+```{r}
+
+```
+
+
+## Question 4 (3 points)
+
+Write a function that calculates the area of a rectangle. The function should have an input for length (in inches) and width (in inches). Set a default value for both length and width to be 48.
+
+The function should have 2 outputs: the area in terms of square inches and the area in terms of square feet. There are 12 inches in 1 foot.
+
+Run your function with a length of 102 and width of 60 and store the output as a variable. Then print the following:
+
+"The area in square inches is {}."
+
+"The area in square feet is {}."
+
+```{r}
+
+```
+
+
+## Question 5 (5 points)
+
+Write a function that takes a single string vector as an input. Have the function return only the word (or words) with the most letters. 
+
+If there are multiple words with the most letters, then return all words with the most letters **as a vector**.
+
+Clarification: This is NOT returning a list that contains each word individually. It is returning a vector containing all words with the most letters.
+
+Test the function using the vector `fruits` created below.
+
+```{r}
+fruits <- c("apple", "orange", "banana", 
+            "pear", "grapes", "kiwi")
+```
+
+
+```{r}
+
+```
+
+
+## Question 6 (4 points)
+
+Write a function that checks if a value is in a vector.
+The function should take both a value and vector as inputs and return either TRUE or FALSE.
+  
+Run your function using the variables `value` and `check` created below.
+  
+```{r}
+value <- 2
+check <- seq(1, 15, 3)
+```
+
+After running the function, depending on what the function returns, print either:
+
+  - "{} is in the vector."
+  - "{} is not in the vector.
+  
+```{r}
+
+```
+
+
+## Question 7 (6 points)
+
+Below is a matrix of random numbers.
+
+```{r}
+# Don't change this! A seed keeps results consistent.
+set.seed(123)
+x <- matrix(sample(-50:50, 20), nrow = 5)
+```
+
+### Part a
+
+Write a function that takes a matrix as an input, converts all negative numbers to NA, and returns the new matrix. Test your function using the matrix `x` that was created for you.
+
+```{r}
+
+```
+
+### Part b
+
+Write a function that takes a matrix as an input and converts all even numbers to 1 and odd numbers to 0. The function should return the new matrix. Test your function using the matrix `x` that was created for you.
+
+```{r}
+
+```
+

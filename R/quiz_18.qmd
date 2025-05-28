@@ -1,0 +1,53 @@
+---
+title: "quiz_18"
+format: html
+---
+#1
+```{r}
+num_letters <- function(word) {
+  nchar(word)
+}
+
+# Example usage
+word  <- "Rstudio"
+count <- num_letters(word)
+cat(word, "has", count, "letters\n")
+```
+#2
+```{r}
+roll_die_once <- function() {
+  sample(1:6, 1, replace = TRUE)
+}
+
+# Roll it five times
+for (i in seq_len(5)) {
+  cat(" Roll", i, "→", roll_die_once(), "\n")
+}
+```
+#3
+```{r}
+roll_die <- function(size = 6, roll_times = 1) {
+  # 1) simulate the rolls
+  rolls <- sample(1:size, roll_times, replace = TRUE)
+  return(list(
+    size       = size,
+    roll_times = roll_times,
+    rolls      = rolls,
+    mean       = mean(rolls),
+    sum        = sum(rolls),
+    min        = min(rolls),
+    max        = max(rolls)
+  ))
+}
+
+res <- roll_die(10,10)
+
+paste(
+  "The average of", res$roll_times, 
+  "rolls of a", res$size, "-sided die is", 
+  res$mean
+)
+
+```
+
+

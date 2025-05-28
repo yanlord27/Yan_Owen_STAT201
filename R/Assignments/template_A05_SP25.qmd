@@ -1,0 +1,274 @@
+---
+title: "Assignment 5"
+subtitle: "STAT 201"
+author: "Owen Yan"
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+
+execute:
+  message: false
+  warning: false
+---
+
+## Instructions {-}
+
+1. **Write your name** on the assignment
+
+2. Write your code in the *Code* cells of the **template provided** to write solutions for the assignment. **Do not open a new qmd**, and work from scratch. Ensure that the solution is written neatly enough to understand and grade.
+
+3. You may talk to a friend, discuss the questions and potential directions for solving them. However, you need to write your own solutions and code separately, and not as a group activity. Do not use AI to solve the problems.
+
+4. There are point deductions if your code is not clean and organized.
+
+5. Only print what is asked for. Highly inefficient code will be deducted for because it demonstrates lack of understanding.
+
+6. Render as an HTML and **submit BOTH the .qmd and HTML file**.
+
+The grader cannot grade what they cannot see! Failure to render your document after completing all questions will lead to deductions.
+
+## Question 1 (4 points)
+ 
+### Part a
+
+Create a character variable called `var_string` that contains any integer (coded as a character). Print `var_string` and print the results of using the `typeof()` function.
+
+```{r}
+var_string<-"1"
+print(var_string)
+print(typeof(var_string))
+```
+
+### Part b
+
+Create a variable called `var_num` which is created by converting `var_sting` to a numeric variable. 
+
+Then create a variable called `var_even` which is a Boolean variable that is TRUE if `var_num` is even and FALSE otherwise. 
+
+Then create a variable called `var_pos` which is a Boolean variable that is TRUE if `var_num` is greater than 0 and FALSE otherwise. 
+
+Print `var_num`, `var_even`, and `var_pos`.
+
+```{r}
+var_num<-as.numeric(var_string)
+var_even<-(var_num %% 2 == 0)
+var_pos <-(var_num > 0)
+print(var_num)
+print(var_even)
+print(var_pos)
+```
+
+
+### Part c
+
+In a single line, using only &&, ||, ! functions, have the output return TRUE if `var_even` and `var_pos` are **different**, and FALSE if they are the **same**.
+
+This needs to be capable of running for any possible integer for `var_num`, not just the one specific case you entered.
+
+```{r}
+print((var_even && !var_pos) || (!var_even && var_pos))
+```
+
+
+## Question 2 (3 points)
+
+Define a variable called `var_seconds` that contains any integer of your choice for the number of seconds and prints out how many corresponding minutes and seconds that is. 
+
+Example:
+
+        `200 seconds is 3 minutes and 20 seconds.`
+        
+Requirements: 
+
+  - if minutes is 1 then it should instead read 1 minute (not 1 minutes)
+  - if seconds is 1 then it should instead read 1 second (not 1 seconds)
+
+Example:
+
+        `61 seconds is 1 minute and 1 second.        
+        
+This needs to be capable of running on any possible integer for `var_seconds`, not just the one specific case you entered.
+
+```{r}
+var_seconds<-1238
+num_min<-var_seconds%/%60
+num_sec<-var_seconds%%60
+if (var_seconds==1){
+  cat(var_seconds, "second is", num_min, "minutes and",num_sec, "second.")
+}else{
+if (num_min==1){
+  if (num_sec==1){
+    cat(var_seconds, "seconds is", num_min, "minute and",num_sec, "second.")
+  }else{
+    cat(var_seconds, "seconds is", num_min, "minute and",num_sec, "seconds.")
+  }
+}else{
+  if (num_sec==1){
+    cat(var_seconds, "seconds is", num_min, "minutes and",num_sec, "second.")
+  }else{
+    cat(var_seconds, "seconds is", num_min, "minutes and",num_sec, "seconds.")
+  }
+}
+}
+```
+
+
+## Question 3 (6 points)
+
+The below code chunk defines 3 numbers.
+
+```{r}
+num1 <- 10
+num2 <- 28
+num3 <- 4
+```
+
+### Part a
+
+Use a single if-else if-else statement to print the largest of the 3 numbers defined above. 
+
+Note: this must still run correctly even if you change the numbers.
+
+```{r}
+if (num2>=num1 && num2>=num3){
+    print(num2)
+}else if (num3>=num1 && num3>=num2){
+    print(num3)
+}else{
+    print(num1)
+}
+```
+
+### Part b
+
+Use a nested conditional statement to print the largest of the 3 numbers defined above. 
+
+Note: this must still run correctly even if you change the numbers.
+
+```{r}
+if (num1 >= num2){
+    if (num1 >= num3){
+        print(num1)
+    }else{
+        print(num3)
+}
+}else{
+    if (num2 >= num3){
+        print(num2)
+    }else{
+        print(num3)
+    }
+}
+```
+
+
+## Question 4 (3 points)
+
+Write a program (loop) that calculates the factorial of a number.
+
+- A factorial is the product of all positive integers less than or equal to a given positive integer. Example: 5! = 5 * 4 * 3 * 2 * 1
+- Define a variable to any integer value of your choice prior to creating the program.
+- ONLY print the final factorial of the number
+
+Note: this must still run correctly even if you change the number.
+
+```{r}
+fact_num<-10
+final_fact<-1
+while (fact_num>=1){
+  final_fact=final_fact*fact_num
+  fact_num<-fact_num-1
+}
+cat(final_fact)
+```
+
+## Question 5 (4 points)
+
+Define a variable to be a numeric value of 24.
+
+Write a program (loop) that prints all the factors of a positive integer. A factor is any positive integer that divides the number and leaves no remainder. Show the output of the program with the variable you defined to be 24.
+
+Note: this must still run correctly even if you change the number.
+
+```{r}
+num_val<-24
+for(i in 1:num_val){
+  if (num_val==i){
+    cat(i,".",sep="")
+    break
+  }
+  if (num_val%%i==0){
+    cat(i,", ",sep="")
+  }
+}
+```
+
+## Question 6 (4 points)
+
+Define a variable to be a numeric value of 89.
+
+Write a program (loop) that identifies whether a positive integer is prime or not. A prime number is a number whose only divisors are 1 and itself. 
+
+ONLY print one of the following statements:
+
+  - `{} is a prime number.`
+  - `{} is not a prime number.`
+  
+depending on whether or not the integer is prime.
+  
+Show the output of the program with the variable you defined to be 89.
+
+Note: this must still run correctly even if you change the number.
+
+```{r}
+number <- 89
+is_prime <- TRUE
+for (i in 2:(number-1)) {
+  if (number %% i == 0) {
+    is_prime <- FALSE
+    break         
+  }
+}
+if (is_prime) {
+  cat(number, "is a prime number.\n")
+} else {
+  cat(number, "is not a prime number.\n")
+}
+
+```
+
+
+## Question 7 (6 points)
+
+Define a variable to be a numeric value of 4000.
+
+Write a program (loop) that finds the first positive integer whose square exceeds the numeric variable you defined.
+
+ONLY print the following statement:
+
+ - `{} squared is {}, and is the first number whose square exceeds {}.`
+
+Example:
+
+  - `64 squared is 4096, and is the first number whose square exceeds 4000.`
+
+Note: this must still run correctly even if you change the initial number.
+
+Example:
+
+  - `11 squared is 121, and is the first number whose square exceeds 100.`
+
+```{r}
+num_big<-4000
+small_int<-1
+while(TRUE){
+  if(small_int^2>num_big){
+    break
+  }
+  small_int<-small_int+1
+}
+cat(small_int,"squared is", small_int^2,"and is the first number whose square exceeds", num_big)
+```
+
