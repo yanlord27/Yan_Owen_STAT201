@@ -1,6 +1,0 @@
----
-title: "Practice"
-format: html
----
-
-asdlkj
