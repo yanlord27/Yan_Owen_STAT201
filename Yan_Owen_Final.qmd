@@ -1,0 +1,242 @@
+---
+title: "Final Exam"
+subtitle: "STAT 201"
+author: "Owen Yan"
+
+format:
+  html:
+    toc: true
+    embed-resources: true
+
+execute:
+  message: false
+  warning: false
+---
+
+# Instructions
+
+1. **Write your name** at the top! Major deductions if not.
+
+2. Write your code in the *Code* cells of the **template provided** to write solutions for the assignment. **Do not open a new qmd**, and work from scratch. Ensure that the solution is written neatly enough to understand and grade.
+
+3. This exam is open note open book. You are NOT permitted to use AI or each other.
+
+4. There are point deductions if your code is not clean and organized.
+
+5. Highly inefficient code will be deducted for because it demonstrates lack of understanding. 
+
+6. Each question should print your answer. But don't print excessive/random information.
+
+7. Render as an HTML and **submit BOTH the .qmd and HTML file**.
+
+I cannot grade what I cannot see! Failure to render your document after completing all questions can lead to major deductions.
+
+
+## Question 1 (*2 points*)
+
+Continually **generate** a random integer between 1 and 10 until the sum is greater than or equal to 30. 
+
+Print the random integer that is generated.
+
+Once the program is **complete** print the following statement:
+
+"You generated {} numbers that sum to {}." 
+
+Note:
+
+- the first {} is the count of the number of terms entered 
+- the second {} is the sum of all the terms
+    
+Run your program until it ends.
+
+```{r}
+count<-0
+sum<-0
+while(TRUE){
+  rand_num<-sample(1:10, 1)
+  count<-count+1
+  sum<-sum+rand_num
+  if(sum>=30){
+    break
+  }
+}
+sprintf("You generated %g numbers that sum to %g",count,sum)
+```
+
+## Question 2 (*2 points*)
+
+Write a function that calculates BMI. 
+
+The function should have inputs for height (in inches) and weight (in pounds).
+
+BMI =  $703 * \frac{weight}{height^2}$
+
+BMI **categories** are defined as follows:
+
+- Underweight: < 18.5
+- Normal: 18.5 <= BMI < 25
+- Overweight: 25 <= BMI < 30
+- Obese = BMI of 30 or greater
+
+The function should return 2 values: the BMI (numeric value) and category ("Underweight", "Normal", "Overweight", "Obese").
+
+**After** your function is defined, complete the following tasks:
+
+- Run your function using any height and weight of your choice
+- Store the output of the function as a variable(s)
+- Print the following statement **using your stored variable** with BMI rounded to 1 decimal place:
+
+                   "Your BMI is {} with a value of {}." 
+          Example: "Your BMI is Normal with a value of 22.5."
+                
+```{r}
+bmi_calc<-function(height,weight){
+  bmi<-703*weight/(height^2)
+  if(bmi<18.5){
+    category<-"Underweight"
+  }else if(bmi<25){
+    category<-"Normal"
+  }else if(bmi<30){
+    category<-"Overweight"
+  }else{
+    category<-"Obese"
+  }
+  return(c(bmi,category))
+}
+my_bmi<-as.numeric(bmi_calc(50,160)[1])
+my_cat<-bmi_calc(50,160)[2]
+sprintf("You BMI is %s with a value of %.1f",my_cat,my_bmi)
+```
+         
+                
+## Question 3 (*5 points*)
+
+### a
+
+Create 3 vectors named `vec1`, `vec2`, `vec3`: 
+
+- `vec1` should contain the numbers: 5, 8, -2, 0, 11
+- `vec2` should contain the numbers: -7, 3, 12, 6, -1
+- `vec3` should be a `seq()` of 1 to 13 by 3
+
+```{r}
+vec1<-c(5,8,-2,0,11)
+vec2<-c(-7,3,12,6,-1)
+vec3<-seq(1,13,3)
+```
+
+
+### b
+
+Create a matrix where `vec1` is the first column, `vec2` is the second column, and `vec3` is the third column.
+
+Print the matrix.
+
+```{r}
+mat<-matrix(c(vec1,vec2,vec3), ncol=3)
+print(mat)
+```
+
+
+### c
+
+Use an appropriate apply function to calculate the maximum value of each column of the matrix. Store the output as `max_col` then print the results.
+
+```{r}
+max_col<-apply(mat,2,max)
+print(max_col)
+```
+
+
+### d
+
+Create a list object where each element is one of the vectors (`vec1`, `vec2`, `vec3`) from part a. 
+
+Print the list.
+
+```{r}
+my_list<-list(vec1,vec2,vec3)
+print(my_list)
+```
+
+
+### e
+
+Use an appropriate apply function to determine if the `sum` of each list element is even. The output should be stored as a vector and contain either TRUE or FALSE (depending if the sum was even or odd). 
+
+Print the results.
+
+Note: if done correctly this will print: TRUE FALSE FALSE
+
+```{r}
+sum_par<-unlist(lapply(lapply(my_list,sum),function(x) x%%2==0))
+print(sum_par)
+```
+
+
+## Question 4 (*3 points*)
+
+Consider the `fruit_info` object defined below which contains fruits, their corresponding color, and their weight in grams.
+
+```{r}
+fruit_info = data.frame(
+  fruit = c("apple", "banana", "grape", "strawberry",  "watermelon", 
+            "lime", "lemon", "cherry", "cranberry", "orange", "pineapple", 
+            "avocado", "blueberry"),
+  color = c("red", "yellow", "green", "red",  "red", 
+            "green", "yellow", "red", "red", "orange", "yellow",
+            "green", "blue"),
+  weight = c(80, 108, 5, 13, 6450, 67, 58, 11, 2, 120,
+             900, 215, 3)
+  )
+```
+
+
+### a
+
+Use slicing to create a data frame of only fruits that are red.
+
+Store this new data frame as `fruits_red` and print the object.
+
+```{r}
+fruits_red<-fruit_info[fruit_info$color=="red", ]
+print(fruits_red)
+```
+
+
+### b
+
+Use an appropriate built-in function (no loop) to print the "name" of the `fruit` that has the heaviest weight. 
+
+Only the name of the fruit should be output/printed.
+
+```{r}
+heavy<-fruit_info[fruit_info$weight==max(fruit_info$weight),]$fruit
+print(heavy)
+```
+
+
+### c
+
+If a fruit is over 100 grams it is "heavy", otherwise it is "light".
+
+Using any method of your choice, print the following statement indicating whether each fruit is heavy or light.
+
+Your first two printed lines will read as follows:
+
+  - "The apple is light."
+  - "The banana is heavy."
+  - etc.
+
+```{r}
+for(i in 1:nrow(fruit_info)){
+  name<-fruit_info$fruit[i]
+  if(fruit_info$weight[i]>=100){
+    cat("The ",name,"is heavy.","\n")
+  }else{
+    cat("The ",name,"is light.","\n")
+  }
+}
+```
+
+
