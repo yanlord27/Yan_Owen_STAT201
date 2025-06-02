@@ -1,0 +1,12 @@
+---
+title: "practice"
+format: html
+---
+
+```{r}
+x<-"TRUE"
+y<-as.logical(x)
+z<-as.numeric(y)
+print(z)
+```
+
